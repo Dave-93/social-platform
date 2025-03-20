@@ -1,0 +1,32 @@
+1)
+SELECT DISTINCT u.*
+FROM users AS u
+JOIN medias AS m ON u.id = m.user_id
+WHERE m.type = 'video';
+
+2)
+SELECT p.id AS 'Post senza like'
+FROM posts AS p
+LEFT JOIN likes AS l ON p.id = l.post_id
+WHERE l.post_id IS NULL;
+
+3)
+SELECT p.id AS' Post', COUNT(l.post_id) AS 'Numero di like per post'
+FROM posts AS p
+JOIN likes AS l ON p.id = l.post_id
+GROUP BY p.id;
+
+4)
+SELECT u.id AS 'Utenti', COUNT(m.id) AS `Numero di media caricati`
+FROM users as u
+JOIN medias as m ON u.id = m.user_id
+GROUP BY u.id
+ORDER BY `Numero di media caricati` DESC;
+
+5)
+SELECT u.id AS 'Utenti', COUNT(l.post_id) AS `Totale like ricevuti`
+FROM users AS u
+JOIN posts AS p ON u.id = p.user_id
+JOIN likes AS l ON p.id = l.post_id
+GROUP BY u.id
+ORDER BY `Totale like ricevuti` DESC;
